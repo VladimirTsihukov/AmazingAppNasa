@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_very_small">1dp</dimen>
+    <dimen name="margin_xxxx_small">2dp</dimen>
+    <dimen name="margin_xxx_small">4dp</dimen>
+    <dimen name="margin_xx_small">6dp</dimen>
+    <dimen name="margin_x_small">8dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+
+    <dimen name="padding_very_small">1dp</dimen>
+    <dimen name="padding_xxxx_small">2dp</dimen>
+    <dimen name="padding_xxx_small">4dp</dimen>
+    <dimen name="padding_xx_small">6dp</dimen>
+    <dimen name="padding_x_small">8dp</dimen>
+    <dimen name="padding_small">10dp</dimen>
+
+    <dimen name="width_sheet_line">45dp</dimen>
+</resources>

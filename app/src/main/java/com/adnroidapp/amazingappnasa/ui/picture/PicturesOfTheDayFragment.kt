@@ -14,6 +14,7 @@ import coil.api.load
 import com.adnroidapp.amazingappnasa.MainActivity
 import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.data.NasaImageResponse
+import com.adnroidapp.amazingappnasa.ui.fragment.SettingFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
@@ -45,6 +46,7 @@ class PicturesOfTheDayFragment : Fragment(R.layout.main_fragment) {
         })
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
@@ -53,7 +55,13 @@ class PicturesOfTheDayFragment : Fragment(R.layout.main_fragment) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> toast("Favorite")
-            R.id.app_bar_setting -> toast("Setting")
+            R.id.app_bar_setting -> {
+                activity?.let {
+                    it.supportFragmentManager.beginTransaction()
+                        .add(R.id.container, SettingFragment.newInstance(), SettingFragment.TAG)
+                        .addToBackStack(SettingFragment.TAG).commit()
+                }
+            }
             R.id.app_bar_search -> toast("Search")
             android.R.id.home -> {
                 activity?.let {

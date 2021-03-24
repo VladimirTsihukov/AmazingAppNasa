@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.AmazingAppNasa" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Nasa" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/color_blue_primary_nasa</item>
+        <item name="colorPrimaryVariant">@color/color_blue_dark_nasa</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,31 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="backgroundNavigationLayout">@color/color_blue_light_nasa</item>
+        <item name="backgroundFloatingActionButton">@color/color_blue_dark_nasa</item>
+        <item name="colorSurface">@color/color_blue_primary_nasa</item>
+        <item name="colorPrimaryDark">@color/color_blue_dark_nasa</item>
+    </style>
+
+    <style name="Theme.Mars" parent="Theme.Nasa">
+        <item name="colorPrimaryVariant">@color/color_orange_dark_mars</item>
+        <item name="colorPrimary">@color/color_orange_primary_mars</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Customize your theme here. -->
+        <item name="backgroundNavigationLayout">@color/color_orange_light_mars</item>
+        <item name="backgroundFloatingActionButton">@color/color_orange_dark_mars</item>
+        <item name="colorSurface">@color/color_orange_primary_mars</item>
+        <item name="colorPrimaryDark">@color/color_orange_dark_mars</item>
+    </style>
+
+    <style name="Theme.Moon" parent="Theme.Nasa">
+        <item name="colorPrimaryVariant">@color/color_grey_dark_moon</item>
+        <item name="colorPrimary">@color/color_grey_primary_moon</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Customize your theme here. -->
+        <item name="backgroundNavigationLayout">@color/color_grey_light_moon</item>
+        <item name="backgroundFloatingActionButton">@color/color_grey_dark_moon</item>
+        <item name="colorSurface">@color/color_grey_primary_moon</item>
+        <item name="colorPrimaryDark">@color/color_grey_dark_moon</item>
     </style>
 </resources>

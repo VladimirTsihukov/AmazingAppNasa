@@ -5,12 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color_layout_main"
-    tools:context=".ui.picture.PicturesOfTheDayFragment">
+    tools:context=".ui.fragment.PicturesOfTheDayFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/table_layout_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color_layout_main"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/table_item_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/table_item_yesterday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yesterday" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/table_item_tomorrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_2_day_ago" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <com.adnroidapp.amazingappnasa.ui.view.EquilateralImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:foregroundGravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/table_layout_main"
+            app:srcCompat="@drawable/ic_baseline_photo_64" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout"
@@ -24,9 +61,9 @@
             app:endIconDrawable="@drawable/ic_wikipedia"
             app:endIconMode="custom"
             app:helperText="@string/wiki_helper_text"
-            app:layout_constraintBottom_toTopOf="@+id/image_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_edit_text"
@@ -34,16 +71,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.adnroidapp.amazingappnasa.ui.view.EquilateralImageView
-            android:id="@+id/image_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foregroundGravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_layout"
-            app:srcCompat="@drawable/ic_baseline_photo_64" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -62,8 +89,8 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
-        app:backgroundTint="?attr/backgroundFloatingActionButton"
         android:layout_height="wrap_content"
+        app:backgroundTint="?attr/backgroundFloatingActionButton"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_plus_fab"
         app:tint="@color/white" />

@@ -26,7 +26,7 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_nasa"
             android:text="@string/nasa"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
+            style="@style/style_chips"
             android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -34,7 +34,7 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_mars"
             android:text="@string/mars"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
+            style="@style/style_chips"
             app:iconEndPadding="@dimen/padding_x_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -42,7 +42,7 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_moon"
             android:text="@string/moon"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
+            style="@style/style_chips"
             app:iconEndPadding="@dimen/padding_x_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -53,7 +53,6 @@
         android:id="@+id/btn_save_theme"
         style="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
         android:layout_width="wrap_content"
-        app:backgroundTint="@color/color_accent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/save" />

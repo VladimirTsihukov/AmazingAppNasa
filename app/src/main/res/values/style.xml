@@ -25,4 +25,8 @@
         <item name="android:background">@color/color_sheet_line</item>
     </style>
 
+    <style name="style_chips" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

@@ -13,4 +13,16 @@
     <string name="mars">Mars</string>
     <string name="moon">Moon</string>
     <string name="save">Save</string>
+    <string name="image">Image</string>
+    <string name="earth">Earth</string>
+    <string name="title_text">Title text</string>
+    <string name="message_text">Message text</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="_2_day_ago">2 day ago</string>
+    <string name="planet_earth">Planet: Earth</string>
+    <string name="planet_mars">Planet: Mars</string>
+    <string name="satellite_moon">Satellite: Moon</string>
+
 </resources>

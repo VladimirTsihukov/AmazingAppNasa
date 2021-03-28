@@ -1,51 +1,78 @@
-package com.adnroidapp.amazingappnasa.ui.picture
+package com.adnroidapp.amazingappnasa.ui.fragment
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.api.load
+import com.adnroidapp.amazingappnasa.ClassKey.SEARCH_WIKI
+import com.adnroidapp.amazingappnasa.ClassKey.TODAY
+import com.adnroidapp.amazingappnasa.ClassKey.TWO_DAY_AGO
+import com.adnroidapp.amazingappnasa.ClassKey.YESTERDAY
 import com.adnroidapp.amazingappnasa.MainActivity
 import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.data.NasaImageResponse
-import com.adnroidapp.amazingappnasa.ui.fragment.SettingFragment
+import com.adnroidapp.amazingappnasa.toast
+import com.adnroidapp.amazingappnasa.ui.PictureOfTheDayData
+import com.adnroidapp.amazingappnasa.ui.viewModel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
-import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.main_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_main.view.*
+import java.util.*
 
-class PicturesOfTheDayFragment : Fragment(R.layout.main_fragment) {
+class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: PictureOfTheDayViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var serverResponseData: NasaImageResponse
+    private lateinit var tableLayout: TabLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setBottomAppBar(view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        setTabLayout(view)
+    }
+
+    private fun setTabLayout(view: View) {
+        tableLayout = view.findViewById(R.id.table_layout_main)
+        tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> viewModel.getPhotoOfTheDatInServer(TODAY)
+                    1 -> viewModel.getPhotoOfTheDatInServer(YESTERDAY)
+                    2 -> viewModel.getPhotoOfTheDatInServer(TWO_DAY_AGO)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        input_layout.setEndIconOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://en.wikipedia.org/wiki/${input_edit_text.text.toString()}")
-            })
-        }
-
-        viewModel.getData().observe(viewLifecycleOwner, {
+        searchInWiki()
+        viewModel.liveDataForViewToObserver.observe(viewLifecycleOwner, {
             renderData(it)
         })
     }
 
+    private fun searchInWiki() {
+        input_layout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("$SEARCH_WIKI${input_edit_text.text.toString()}")
+            })
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -54,7 +81,6 @@ class PicturesOfTheDayFragment : Fragment(R.layout.main_fragment) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> toast("Favorite")
             R.id.app_bar_setting -> {
                 activity?.let {
                     it.supportFragmentManager.beginTransaction()
@@ -69,6 +95,14 @@ class PicturesOfTheDayFragment : Fragment(R.layout.main_fragment) {
                         it.supportFragmentManager,
                         BottomNavigationDrawerFragment.TAG
                     )
+                }
+            }
+            R.id.app_bar_image -> {
+                activity?.let {
+                    it.supportFragmentManager.beginTransaction()
+                        .add(R.id.container, ImageFragment.newInstance(), ImageFragment.TAG)
+                        .addToBackStack(ImageFragment.TAG)
+                        .commit()
                 }
             }
         }
@@ -91,7 +125,7 @@ class PicturesOfTheDayFragment : Fragment(R.layout.main_fragment) {
                 }
             }
             is PictureOfTheDayData.Error -> {
-                toast(data.error.message)
+                toast(data.error.message.toString())
             }
             is PictureOfTheDayData.Loading -> {
 
@@ -149,13 +183,6 @@ class PicturesOfTheDayFragment : Fragment(R.layout.main_fragment) {
                 bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar)
             }
             isMain = !isMain
-        }
-    }
-
-    private fun Fragment.toast(string: String?) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
-            setGravity(Gravity.BOTTOM, 0, 250)
-            show()
         }
     }
 

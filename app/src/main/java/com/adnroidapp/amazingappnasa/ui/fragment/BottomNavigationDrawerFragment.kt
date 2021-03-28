@@ -1,4 +1,4 @@
-package com.adnroidapp.amazingappnasa.ui.picture
+package com.adnroidapp.amazingappnasa.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

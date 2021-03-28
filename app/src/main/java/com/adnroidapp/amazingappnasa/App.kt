@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 
 class App : Application() {
-    private val NAME_SHARED_PREF = "SharedPrefThemes"
+    private val PREF_NAME = "SharedPrefThemes"
     private val NAME_THEME = "NAME_THEME"
 
     companion object {
@@ -19,13 +19,13 @@ class App : Application() {
 
     fun getNameTheme(): String {
         val sharedPref: SharedPreferences =
-            applicationContext.getSharedPreferences(NAME_SHARED_PREF, MODE_PRIVATE)
+            applicationContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE)
         return sharedPref.getString(NAME_THEME, "").toString()
     }
 
     fun setNameThemeSharedPref(nameTheme: ThemesEnum) {
         val sharedPreferences =
-            applicationContext.getSharedPreferences(NAME_SHARED_PREF, MODE_PRIVATE)
+            applicationContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(NAME_THEME, nameTheme.name)
         editor.apply()

@@ -1,4 +1,4 @@
-package com.adnroidapp.amazingappnasa.ui.picture
+package com.adnroidapp.amazingappnasa.ui
 
 import com.adnroidapp.amazingappnasa.data.NasaImageResponse
 

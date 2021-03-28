@@ -11,7 +11,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiFactory {
-    private const val BASE_URL = "https://api.nasa.gov/"
+    const val URL_PICTURE_OF_THE_DAY = "https://api.nasa.gov/"
+    const val URL_IMAGES_EARTH = "https://api.nasa.gov/EPIC/api/natural/date/"
+    const val URL_IMAGES_ROVER_MARS = "https://api.nasa.gov/mars-photos/api/"
+
     private const val API_KEY = "api_key"
 
     private val interceptor = Interceptor { chain ->
@@ -39,12 +42,11 @@ object ApiFactory {
         .setLenient()
         .create()
 
-    private fun retrofitImageNasa(): Retrofit = Retrofit.Builder()
+    private fun retrofitImageNasa(url : String): Retrofit = Retrofit.Builder()
         .client(client)
-        .baseUrl(BASE_URL)
+        .baseUrl(url)
         .addConverterFactory(GsonConverterFactory.create(gson()))
         .build()
 
-    val API_SERVICE_NASA_IMAGE: ApiServiсe =
-        retrofitImageNasa().create(ApiServiсe::class.java)
+    fun getApiService(url : String): ApiServiсe = retrofitImageNasa(url).create(ApiServiсe::class.java)
 }

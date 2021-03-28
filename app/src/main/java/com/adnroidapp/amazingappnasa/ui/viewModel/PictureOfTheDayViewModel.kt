@@ -1,26 +1,28 @@
-package com.adnroidapp.amazingappnasa.ui.picture
+package com.adnroidapp.amazingappnasa.ui.viewModel
 
-import androidx.lifecycle.LiveData
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.adnroidapp.amazingappnasa.ClassKey.TODAY
 import com.adnroidapp.amazingappnasa.api.ApiFactory
 import com.adnroidapp.amazingappnasa.data.NasaImageResponse
+import com.adnroidapp.amazingappnasa.getDate
+import com.adnroidapp.amazingappnasa.ui.PictureOfTheDayData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PictureOfTheDayViewModel(
-    private val liveDataForViewToObserver: MutableLiveData<PictureOfTheDayData> = MutableLiveData()
-) : ViewModel() {
+class PictureOfTheDayViewModel(application: Application) : AndroidViewModel(application) {
 
-    fun getData(): LiveData<PictureOfTheDayData> {
-        sendServerRequest()
-        return liveDataForViewToObserver
+    val liveDataForViewToObserver: MutableLiveData<PictureOfTheDayData> = MutableLiveData()
+
+    init {
+        getPhotoOfTheDatInServer(TODAY)
     }
 
-    private fun sendServerRequest() {
+    fun getPhotoOfTheDatInServer(day: Int) {
         liveDataForViewToObserver.value = PictureOfTheDayData.Loading(null)
-        ApiFactory.API_SERVICE_NASA_IMAGE.getNasaImage()
+        ApiFactory.getApiService(ApiFactory.URL_PICTURE_OF_THE_DAY).getNasaImage(getDate(day))
             .enqueue(object : Callback<NasaImageResponse> {
                 override fun onResponse(
                     call: Call<NasaImageResponse>,
@@ -28,7 +30,7 @@ class PictureOfTheDayViewModel(
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            liveDataForViewToObserver.value = PictureOfTheDayData.Success(it)
+                            liveDataForViewToObserver.postValue(PictureOfTheDayData.Success(it))
                         }
                     }
                 }
@@ -36,7 +38,6 @@ class PictureOfTheDayViewModel(
                 override fun onFailure(call: Call<NasaImageResponse>, t: Throwable) {
                     liveDataForViewToObserver.value = PictureOfTheDayData.Error(t)
                 }
-
             })
     }
 }

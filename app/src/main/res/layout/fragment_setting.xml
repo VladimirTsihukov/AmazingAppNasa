@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_gray"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?backgroundNavigationLayout"
+        android:padding="@dimen/padding_small"
+        android:text="@string/theme_app"
+        android:textSize="15sp" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/padding_small"
+        app:singleSelection="true"
+        app:chipSpacingHorizontal="@dimen/margin_small"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_nasa"
+            android:text="@string/nasa"
+            style="@style/style_chips"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_mars"
+            android:text="@string/mars"
+            style="@style/style_chips"
+            app:iconEndPadding="@dimen/padding_x_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_moon"
+            android:text="@string/moon"
+            style="@style/style_chips"
+            app:iconEndPadding="@dimen/padding_x_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_theme"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/save" />
+
+</LinearLayout>

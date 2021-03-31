@@ -1,12 +1,9 @@
 package com.adnroidapp.amazingappnasa
 
 import android.app.Application
-import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 
 class App : Application() {
-    private val PREF_NAME = "SharedPrefThemes"
-    private val NAME_THEME = "NAME_THEME"
-
     companion object {
         lateinit var instance: App
     }
@@ -14,20 +11,10 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        if (getNameTheme().isEmpty()) setNameThemeSharedPref(ThemesEnum.NASA)
     }
 
-    fun getNameTheme(): String {
-        val sharedPref: SharedPreferences =
-            applicationContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE)
-        return sharedPref.getString(NAME_THEME, "").toString()
-    }
-
-    fun setNameThemeSharedPref(nameTheme: ThemesEnum) {
-        val sharedPreferences =
-            applicationContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString(NAME_THEME, nameTheme.name)
-        editor.apply()
+    fun getNameThemeSetting(): String {
+        val prefSetting = PreferenceManager.getDefaultSharedPreferences(this)
+        return prefSetting.getString(this.getString(R.string.KEY_THEME), ThemesEnum.NASA.name) ?: ThemesEnum.NASA.name
     }
 }

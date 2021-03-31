@@ -35,7 +35,8 @@ class ImageViewModel(application: Application) : AndroidViewModel(application) {
                             val imageDataClass = mutableListOf<ImageDataClass>()
                             if (it.isNotEmpty()) {
                                 it.forEachIndexed { _, responseItem ->
-                                    imageDataClass.add(ImageDataClass(image = responseItem.image,
+                                    imageDataClass.add(ImageDataClass(
+                                        image = responseItem.image,
                                         date = responseItem.date,
                                         namePlanet = contextApplication.resources.getString(R.string.planet_earth)))
                                 }
@@ -64,7 +65,8 @@ class ImageViewModel(application: Application) : AndroidViewModel(application) {
                             val imageDataClass = mutableListOf<ImageDataClass>()
                             if (it.photos.isNotEmpty()) {
                                 it.photos.forEachIndexed { _, photosItem ->
-                                    imageDataClass.add(ImageDataClass(image = photosItem.imgSrc,
+                                    imageDataClass.add(ImageDataClass(
+                                        image = photosItem.imgSrc,
                                         date = photosItem.earthDate,
                                         namePlanet = contextApplication.resources.getString(R.string.planet_mars)))
                                 }

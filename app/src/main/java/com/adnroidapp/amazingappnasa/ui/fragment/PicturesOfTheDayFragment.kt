@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import java.util.*
 
-class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main) {
+class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
 
     private val viewModel: PictureOfTheDayViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>

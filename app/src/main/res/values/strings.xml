@@ -24,5 +24,22 @@
     <string name="planet_earth">Planet: Earth</string>
     <string name="planet_mars">Planet: Mars</string>
     <string name="satellite_moon">Satellite: Moon</string>
+    <string name="choice_of_theme">Choice of theme</string>
+    <string name="choice_of_theme_summary">Choice the theme that suits you</string>
+    <string name="KEY_THEME" formatted="false">KEY_THEME</string>
+    <string name="message_in_toolbar_for_mars">Photos of NASA Curiosity rover, capabilities and the Spirit rovers on Mars</string>
+    <string name="message_in_toolbar_for_earth">This image was taken by NASA EPIC camera onboard the NOAA DSCOVR spacecraft</string>
+    <string name="message_in_toolbar_for_moon">Photos of the moon taken by NASA</string>
 
+    <string-array name="pref_entry_theme">
+        <item>Theme Nasa</item>
+        <item>Theme Mars</item>
+        <item>Theme Moon</item>
+    </string-array>
+
+    <string-array name="pref_result_theme">
+        <item>NASA</item>
+        <item>MARS</item>
+        <item>MOON</item>
+    </string-array>
 </resources>

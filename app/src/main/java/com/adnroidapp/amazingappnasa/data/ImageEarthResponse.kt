@@ -15,5 +15,6 @@ data class ImageEarthResponse(
 data class ResponseImageEarth(
 	@Expose val image: String,
 	@Expose val date: String,
+	@Expose val caption: String,
 ) : Parcelable
 

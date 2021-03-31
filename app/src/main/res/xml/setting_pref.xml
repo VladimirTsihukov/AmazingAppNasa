@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/theme_app">
+        <ListPreference
+            android:defaultValue="NASA"
+            android:entries="@array/pref_entry_theme"
+            android:entryValues="@array/pref_result_theme"
+            android:key="@string/KEY_THEME"
+            android:summary="@string/choice_of_theme_summary"
+            android:title="@string/choice_of_theme" />
+    </PreferenceCategory>
+</PreferenceScreen>

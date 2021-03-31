@@ -12,6 +12,7 @@ import com.adnroidapp.amazingappnasa.ui.adapter.AdapterImage
 import com.adnroidapp.amazingappnasa.ui.viewModel.ImageViewModel
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_image.*
 
 class ImageFragment : Fragment(R.layout.fragment_image) {
 
@@ -23,6 +24,9 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initToolbar()
+
         recyclerView = view.findViewById(R.id.res_view_image)
         recyclerView.adapter = adapterImage
 
@@ -31,6 +35,34 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
         imageViewModel.liveDataImage.observe(viewLifecycleOwner, {
             adapterImage.bindImage(it, namePlanets)
         })
+    }
+
+    private fun setValuesToolbar() {
+        when(namePlanets) {
+            PlanetsEnum.EARTH -> {
+                ic_image_toolbar.setImageResource(R.drawable.ic_earth_for_toolbar)
+                text_title_toolbar.setText(R.string.earth)
+                text_message_toolbar.setText(R.string.message_in_toolbar_for_earth)
+            }
+            PlanetsEnum.MARS -> {
+                ic_image_toolbar.setImageResource(R.drawable.ic_mars_for_toolbar)
+                text_title_toolbar.setText(R.string.mars)
+                text_message_toolbar.setText(R.string.message_in_toolbar_for_mars)
+            }
+            PlanetsEnum.MOON -> {
+                ic_image_toolbar.setImageResource(R.drawable.ic_moon_for_toolbar)
+                text_title_toolbar.setText(R.string.moon)
+                text_message_toolbar.setText(R.string.message_in_toolbar_for_moon)
+            }
+        }
+
+    }
+
+    private fun initToolbar() {
+        toolbar_image.setNavigationIcon(R.drawable.ic_baseline_arrow_back_32)
+        toolbar_image.setNavigationOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
     }
 
     private fun initBottomNavigation() {
@@ -48,16 +80,19 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
                     R.id.item_bottom_nav_earth -> {
                         namePlanets = PlanetsEnum.EARTH
                         imageViewModel.getImagesEarthInServer()
+                        setValuesToolbar()
                         true
                     }
                     R.id.item_bottom_nav_mars -> {
                         namePlanets = PlanetsEnum.MARS
                         imageViewModel.getPhotoMarsInServer()
+                        setValuesToolbar()
                         true
                     }
                     R.id.item_bottom_nav_moon -> {
                         namePlanets = PlanetsEnum.MOON
                         toast("Moon")
+                        setValuesToolbar()
                         true
                     }
                     else -> true

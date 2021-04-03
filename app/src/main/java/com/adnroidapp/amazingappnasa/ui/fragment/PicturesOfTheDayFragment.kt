@@ -1,12 +1,12 @@
 package com.adnroidapp.amazingappnasa.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.api.load
@@ -25,7 +25,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_main.view.*
+import kotlinx.android.synthetic.main.fragment_main_start.*
+import kotlinx.android.synthetic.main.fragment_main_start.bottom_app_bar
+import kotlinx.android.synthetic.main.fragment_main_start.fab
+import kotlinx.android.synthetic.main.fragment_main_start.input_edit_text
+import kotlinx.android.synthetic.main.fragment_main_start.input_layout
+import kotlinx.android.synthetic.main.view_show_image_web_view.*
 import java.util.*
 
 class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
@@ -109,6 +114,7 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
         return super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
             is PictureOfTheDayData.Success -> {
@@ -117,10 +123,10 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
                 bottom_sheet_description_header.text = serverResponseData.title
 
                 serverResponseData.url?.let {
-                    image_view.load(it.toUri()) {
-                        lifecycle(this@PicturesOfTheDayFragment)
-                        error(R.drawable.ic_baseline_photo_64)
-                        placeholder(R.drawable.ic_baseline_photo_64)
+                    if (serverResponseData.mediaType == "video") {
+                        loadWebView(it)
+                    } else {
+                        imageLoad(it)
                     }
                 }
             }
@@ -128,10 +134,32 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
                 toast(data.error.message.toString())
             }
             is PictureOfTheDayData.Loading -> {
-
             }
         }
     }
+
+    private fun loadWebView(it: String) {
+        image_view.visibility = View.INVISIBLE
+        web_view.visibility = View.VISIBLE
+        web_view.apply {
+            clearCache(true)
+            clearHistory()
+            settings.javaScriptEnabled = true
+            settings.javaScriptCanOpenWindowsAutomatically
+            loadUrl(it)
+        }
+    }
+
+    private fun imageLoad(it: String) {
+        web_view.visibility = View.INVISIBLE
+        image_view.visibility = View.VISIBLE
+        image_view.load(it) {
+            lifecycle(this@PicturesOfTheDayFragment)
+            error(R.drawable.ic_baseline_photo_64)
+            placeholder(R.drawable.ic_baseline_photo_64)
+        }
+    }
+
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -171,11 +199,13 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
 
         fab.setOnClickListener {
             if (isMain) {
+                darkensLayoutPicture()
                 bottom_app_bar.navigationIcon = null
                 bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
                 bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar_two_screen)
             } else {
+                lighterLayoutPicture()
                 bottom_app_bar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
@@ -184,6 +214,16 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
             }
             isMain = !isMain
         }
+    }
+
+    private fun darkensLayoutPicture() {
+        tableLayout.animate().alpha(0.2f).duration = 300
+        layout_load_image.animate().alpha(0.2f).duration = 300
+    }
+
+    private fun lighterLayoutPicture() {
+        tableLayout.animate().alpha(1f).duration = 300
+        layout_load_image.animate().alpha(1f).duration = 300
     }
 
     companion object {

@@ -12,13 +12,14 @@ import com.adnroidapp.amazingappnasa.ui.adapter.AdapterImage
 import com.adnroidapp.amazingappnasa.ui.viewModel.ImageViewModel
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.content_scrolling_image.*
 import kotlinx.android.synthetic.main.fragment_image.*
 
 class ImageFragment : Fragment(R.layout.fragment_image) {
 
     private val imageViewModel: ImageViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
-    private val adapterImage by lazy { AdapterImage() }
+    private lateinit var adapterImage : AdapterImage
     private lateinit var bottomNav: BottomNavigationView
     private var namePlanets = PlanetsEnum.EARTH
 
@@ -27,6 +28,7 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
 
         initToolbar()
 
+        adapterImage = AdapterImage(view)
         recyclerView = view.findViewById(R.id.res_view_image)
         recyclerView.adapter = adapterImage
 
@@ -35,10 +37,15 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
         imageViewModel.liveDataImage.observe(viewLifecycleOwner, {
             adapterImage.bindImage(it, namePlanets)
         })
+
+        nested_scroll_view.setOnScrollChangeListener { _, _, _, _, _ ->
+            toolbar_image.isSelected = nested_scroll_view.canScrollVertically(-1)
+        }
     }
 
+
     private fun setValuesToolbar() {
-        when(namePlanets) {
+        when (namePlanets) {
             PlanetsEnum.EARTH -> {
                 ic_image_toolbar.setImageResource(R.drawable.ic_earth_for_toolbar)
                 text_title_toolbar.setText(R.string.earth)

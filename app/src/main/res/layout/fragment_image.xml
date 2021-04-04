@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container_image_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_dark_gray">
@@ -16,7 +17,9 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:stateListAnimator="@animator/animator_appbar"
+            android:fitsSystemWindows="true"
+            >
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -69,6 +72,7 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar_image"
                     android:layout_width="match_parent"
+                    android:stateListAnimator="@animator/animator_appbar"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin" />
 

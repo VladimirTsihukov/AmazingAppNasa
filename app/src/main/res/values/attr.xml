@@ -2,4 +2,5 @@
 <resources>
     <attr name="backgroundNavigationLayout" format="reference"/>
     <attr name="backgroundFloatingActionButton" format="reference"/>
+    <attr name="colorMenuTool" format="reference"/>
 </resources>

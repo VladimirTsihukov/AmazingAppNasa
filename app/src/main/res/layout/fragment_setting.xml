@@ -8,6 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_setting"
+        app:titleTextColor="?attr/colorMenuTool"
         android:background="?backgroundNavigationLayout"
         android:layout_width="match_parent"
         app:title="@string/setting"

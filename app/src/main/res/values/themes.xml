@@ -13,6 +13,7 @@
         <item name="backgroundNavigationLayout">@color/color_blue_light_nasa</item>
         <item name="backgroundFloatingActionButton">@color/color_red</item>
         <item name="colorSurface">@color/color_blue_primary_nasa</item>
+        <item name="colorMenuTool">@color/white</item>
     </style>
 
     <style name="Mars" parent="Nasa">
@@ -24,6 +25,7 @@
         <item name="backgroundNavigationLayout">@color/color_orange_light_mars</item>
         <item name="backgroundFloatingActionButton">@color/color_orange_dark_mars</item>
         <item name="colorSurface">@color/color_orange_primary_mars</item>
+        <item name="colorMenuTool">@color/black</item>
     </style>
 
     <style name="Moon" parent="Nasa">
@@ -35,5 +37,6 @@
         <item name="backgroundNavigationLayout">@color/color_grey_light_moon</item>
         <item name="backgroundFloatingActionButton">@color/color_grey_dark_moon</item>
         <item name="colorSurface">@color/color_grey_primary_moon</item>
+        <item name="colorMenuTool">@color/black</item>
     </style>
 </resources>

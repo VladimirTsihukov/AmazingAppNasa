@@ -32,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_main_start.input_edit_text
 import kotlinx.android.synthetic.main.fragment_main_start.input_layout
 import kotlinx.android.synthetic.main.view_show_image_web_view.*
 import java.util.*
+import kotlinx.android.synthetic.main.fragment_main_start.layout_load_image as layout_load_image1
 
 class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
 

@@ -19,7 +19,7 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
 
     private val imageViewModel: ImageViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
-    private val adapterImage by lazy { AdapterImage() }
+    private lateinit var adapterImage : AdapterImage
     private lateinit var bottomNav: BottomNavigationView
     private var namePlanets = PlanetsEnum.EARTH
 
@@ -28,6 +28,7 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
 
         initToolbar()
 
+        adapterImage = AdapterImage(view)
         recyclerView = view.findViewById(R.id.res_view_image)
         recyclerView.adapter = adapterImage
 
@@ -41,6 +42,7 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
             toolbar_image.isSelected = nested_scroll_view.canScrollVertically(-1)
         }
     }
+
 
     private fun setValuesToolbar() {
         when (namePlanets) {

@@ -8,11 +8,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_setting"
-        app:titleTextColor="?attr/colorMenuTool"
-        android:background="?backgroundNavigationLayout"
-        android:layout_width="match_parent"
-        app:title="@string/setting"
-        android:layout_height="?attr/actionBarSize"/>
+        style="@style/style_toolBar"
+        app:title="@string/setting"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_setting"

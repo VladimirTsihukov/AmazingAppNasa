@@ -8,19 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.adnroidapp.amazingappnasa.App
 import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.database.dbData.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperAdapter
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperViewHolder
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.OnStartDragListener
 import kotlinx.android.synthetic.main.view_holder_notes.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class AdapterNotes (private val onStartDragListener: OnStartDragListener)
-    : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouchHelperAdapter {
+class AdapterNotes(private val onStartDragListener: OnStartDragListener) :
+    RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouchHelperAdapter {
 
     private var listNotes = mutableListOf<NotesData>()
 
     fun setItem(newListNotes: List<NotesData>) {
+        listNotes.clear()
         listNotes.addAll(newListNotes)
         notifyDataSetChanged()
     }
@@ -42,8 +48,8 @@ class AdapterNotes (private val onStartDragListener: OnStartDragListener)
         notifyItemInserted(listNotes.size)
     }
 
-
-    inner class HolderNotes(private val view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
+    inner class HolderNotes(private val view: View) : RecyclerView.ViewHolder(view),
+        ItemTouchHelperViewHolder {
         private var isCheckedMessage = false
 
         @SuppressLint("ClickableViewAccessibility")
@@ -64,8 +70,14 @@ class AdapterNotes (private val onStartDragListener: OnStartDragListener)
         }
 
         private fun deleteNotes() {
-            listNotes.removeAt(layoutPosition)
-            notifyItemRemoved(layoutPosition)
+            CoroutineScope(Dispatchers.IO).launch {
+                App.db.notes().deleteNotes(listNotes[layoutPosition])
+
+                withContext(Dispatchers.Main) {
+                    listNotes.removeAt(layoutPosition)
+                    notifyItemRemoved(layoutPosition)
+                }
+            }
         }
 
         private fun setCheckMessage() {
@@ -102,7 +114,13 @@ class AdapterNotes (private val onStartDragListener: OnStartDragListener)
 
     //удаляем элемент по свайпу
     override fun itemDismiss(position: Int) {
-        listNotes.removeAt(position)
-        notifyItemRemoved(position)
+        CoroutineScope(Dispatchers.IO).launch {
+            App.db.notes().deleteNotes(listNotes[position])
+
+            withContext(Dispatchers.Main) {
+                listNotes.removeAt(position)
+                notifyItemRemoved(position)
+            }
+        }
     }
 }

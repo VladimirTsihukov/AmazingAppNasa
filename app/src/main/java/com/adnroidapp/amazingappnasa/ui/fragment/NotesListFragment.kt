@@ -3,6 +3,7 @@ package com.adnroidapp.amazingappnasa.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.adnroidapp.amazingappnasa.database.dbData.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.AdapterNotes
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperCallback
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.OnStartDragListener
+import com.adnroidapp.amazingappnasa.ui.viewModel.ListNotesViewModel
 import kotlinx.android.synthetic.main.fragment_list_notes.*
 
 class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
@@ -19,6 +21,7 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
     private lateinit var recyclerView: RecyclerView
     private lateinit var itemTouchHelper: ItemTouchHelper
     private val adapter by lazy { AdapterNotes(dragListener) }
+    private val viewModel: ListNotesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,16 +36,11 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
         itemTouchHelper=  ItemTouchHelper(ItemTouchHelperCallback(adapter))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        val listNotes = listOf(
-            NotesData(0, "Name 0", "Message 0"),
-            NotesData(1, "Name 1", "Message 1"),
-            NotesData(2, "Name 2", "Message 2"),
-            NotesData(3, "Name 3", "Message 3"),
-            NotesData(4, "Name 4", "Message 4"),
-            NotesData(5, "Name 5", "Message 5"),
-        )
-
-        adapter.setItem(listNotes)
+        viewModel.liveDataListNotes.observe(viewLifecycleOwner, { listNotes ->
+            listNotes?.let {
+                adapter.setItem(listNotes)
+            }
+        })
 
         action_bar_add_notes.setOnClickListener {
             activity?.let {

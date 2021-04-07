@@ -1,3 +1,7 @@
 package com.adnroidapp.amazingappnasa.data
 
-data class NotesData (val id: Int, val nameNotes: String, val message: String)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class NotesData (val id: Int, val nameNotes: String, val message: String) : Parcelable

@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.data.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.AdapterNotes
+import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperCallback
 import kotlinx.android.synthetic.main.fragment_list_notes.*
 
 class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
@@ -24,6 +26,9 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
         recyclerView = view.findViewById(R.id.rec_view_notes_list)
         recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         recyclerView.adapter = adapter
+
+        //подключаем к ItemTouchHelper
+        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(recyclerView)
 
         val listNotes = listOf(
             Pair(NotesData(0, "Name 0", "Message 0"), false),
@@ -42,6 +47,10 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
                     .addToBackStack(NotesFragment.TAG).commit()
             }
         }
+    }
+
+    fun addNotes(notesData: NotesData) {
+        adapter.addNotes(Pair(notesData, false))
     }
 
     private fun initToolbar () {

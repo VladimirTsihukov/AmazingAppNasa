@@ -4,18 +4,41 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.adnroidapp.amazingappnasa.R
+import com.adnroidapp.amazingappnasa.data.NotesData
 import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
+    private lateinit var mListener: OnFragmentGetDataNotes
+
     companion object {
         fun newInstance() = NotesFragment()
         const val TAG = "NotesFragment"
+        const val KEY_NOTES_BUNDLE = "KEY_NOTES_BUNDLE"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+
+        btn_save_notes.setOnClickListener {
+
+            activity?.let {
+                mListener.getFragmentNotes(getNotes())
+                it.supportFragmentManager.popBackStack()
+            }
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mListener = activity as OnFragmentGetDataNotes
+    }
+
+    private fun getNotes() : NotesData {
+//        val nameNotes = tv_name_notes.text.toString() ?: "Name notes"
+//        val messageNotes = tv_message_notes.text.toString() ?: "Message notes"
+        return NotesData(id = 0, nameNotes = "Name notes", message = "Message notes")
     }
 
     private fun initToolbar() {

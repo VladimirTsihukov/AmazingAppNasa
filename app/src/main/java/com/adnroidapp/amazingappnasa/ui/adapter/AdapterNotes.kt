@@ -1,14 +1,17 @@
 package com.adnroidapp.amazingappnasa.ui.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.data.NotesData
+import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperAdapter
+import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperViewHolder
 import kotlinx.android.synthetic.main.view_holder_notes.view.*
 
-class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>() {
+class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouchHelperAdapter {
 
     private var listNotes = mutableListOf<Pair<NotesData, Boolean>>()
 
@@ -18,7 +21,9 @@ class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderNotes {
-        return HolderNotes(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_notes, parent, false))
+        return HolderNotes(
+            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_notes, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: HolderNotes, position: Int) {
@@ -27,7 +32,13 @@ class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>() {
 
     override fun getItemCount(): Int = listNotes.size
 
-    inner class HolderNotes(view: View) : RecyclerView.ViewHolder(view) {
+    fun addNotes(notes: Pair<NotesData, Boolean>) {
+        listNotes.add(notes)
+        notifyItemInserted(listNotes.size)
+    }
+
+
+    inner class HolderNotes(view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
         private var isCheckedMessage = false
 
         fun onBind(notes: NotesData) {
@@ -59,5 +70,27 @@ class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>() {
             }
             isCheckedMessage = !isCheckedMessage
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.GRAY)
+        }
+
+        override fun onItemClea() {
+            itemView.setBackgroundColor(0)
+        }
+    }
+
+    //перетаскиваем item
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        listNotes.removeAt(fromPosition).apply {
+            listNotes.add(if (toPosition > fromPosition) toPosition - 1 else toPosition, this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    //удаляем элемент по свайпу
+    override fun itemDismiss(position: Int) {
+        listNotes.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

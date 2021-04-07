@@ -24,8 +24,10 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         navigation_view.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_one -> {Toast.makeText(context, "Screan one", Toast.LENGTH_SHORT)
-                    .show()
+                R.id.navigation_one -> {
+                    activity?.supportFragmentManager?.beginTransaction()
+                        ?.add(R.id.container, NotesListFragment.newInstance(), NotesListFragment.TAG)
+                        ?.addToBackStack(NotesFragment.TAG)?.commit()
                     dismiss()
                 }
                 R.id.navigation_two -> {Toast.makeText(context, "Screan two", Toast.LENGTH_SHORT)

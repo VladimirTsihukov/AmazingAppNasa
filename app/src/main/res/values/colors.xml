@@ -23,6 +23,7 @@
 
     <color name="colorPrimaryDark">#00574B</color>
     <color name="color_gray">#BDBDBD</color>
+    <color name="color_light_gray">#DCDCDC</color>
     <color name="color_launcher_background">#08D9F3</color>
     <color name="color_accent">#D81B60</color>
     <color name="color_red">#c62828</color>

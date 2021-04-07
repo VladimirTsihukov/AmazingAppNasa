@@ -30,6 +30,12 @@
     <string name="message_in_toolbar_for_mars">Photos of NASA Curiosity rover, capabilities and the Spirit rovers on Mars</string>
     <string name="message_in_toolbar_for_earth">This image was taken by NASA EPIC camera onboard the NOAA DSCOVR spacecraft</string>
     <string name="message_in_toolbar_for_moon">Photos of the moon taken by NASA</string>
+    <string name="notes">Notes</string>
+    <string name="title">Title</string>
+    <string name="text_field">Text field</string>
+    <string name="save_notes">Save notes</string>
+    <string name="message">Message</string>
+    <string name="list_notes">List notes</string>
 
     <string-array name="pref_entry_theme">
         <item>Theme Nasa</item>

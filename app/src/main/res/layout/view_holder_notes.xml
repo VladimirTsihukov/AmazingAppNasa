@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/mars" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_item_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_small"
+        android:tint="@color/color_gray"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_notes"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_item_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_small"
+        android:tint="@color/color_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_notes"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_drag_drop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:tint="@color/cardview_shadow_start_color"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name_notes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_name_notes"
+        app:srcCompat="@drawable/ic_hamburger_menu_bottom_bar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_delete_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_drag_drop"
+        app:layout_constraintEnd_toStartOf="@+id/img_drag_drop"
+        app:layout_constraintTop_toTopOf="@+id/img_drag_drop"
+        app:srcCompat="@drawable/ic_archive" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_message_notes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16sp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:textColor="#000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_notes"
+        tools:text="@string/message"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

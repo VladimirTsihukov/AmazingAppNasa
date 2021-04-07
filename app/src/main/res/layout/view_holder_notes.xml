@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_small"
     android:background="@color/white">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -13,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/mars" />
@@ -24,9 +24,9 @@
         android:padding="@dimen/margin_small"
         android:tint="@color/color_gray"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name_notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_notes"
         app:srcCompat="@android:drawable/arrow_up_float" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -35,9 +35,9 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_small"
         android:tint="@color/color_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name_notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_notes"
         app:srcCompat="@android:drawable/arrow_down_float" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -66,6 +66,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:layout_marginTop="@dimen/margin_small"
         android:textColor="#000"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"

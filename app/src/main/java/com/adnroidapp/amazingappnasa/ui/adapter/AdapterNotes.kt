@@ -1,17 +1,22 @@
 package com.adnroidapp.amazingappnasa.ui.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.data.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperAdapter
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperViewHolder
+import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.OnStartDragListener
 import kotlinx.android.synthetic.main.view_holder_notes.view.*
 
-class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouchHelperAdapter {
+class AdapterNotes (private val onStartDragListener: OnStartDragListener)
+    : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouchHelperAdapter {
 
     private var listNotes = mutableListOf<Pair<NotesData, Boolean>>()
 
@@ -38,9 +43,10 @@ class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouch
     }
 
 
-    inner class HolderNotes(view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
+    inner class HolderNotes(private val view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
         private var isCheckedMessage = false
 
+        @SuppressLint("ClickableViewAccessibility")
         fun onBind(notes: NotesData) {
             with(itemView) {
                 tv_name_notes.text = notes.nameNotes
@@ -48,6 +54,12 @@ class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouch
                 img_delete_notes.setOnClickListener { deleteNotes() }
                 img_item_down.setOnClickListener { setCheckMessage() }
                 img_item_up.setOnClickListener { setCheckMessage() }
+                img_drag_drop.setOnTouchListener { _, motionEvent ->
+                    if (MotionEventCompat.getActionMasked(motionEvent) == MotionEvent.ACTION_DOWN) {
+                        onStartDragListener.onStartDragListener(this@HolderNotes)
+                    }
+                    false
+                }
             }
         }
 
@@ -72,11 +84,11 @@ class AdapterNotes : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouch
         }
 
         override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.GRAY)
+            itemView.setBackgroundColor(view.context.getColor(R.color.purple_200))
         }
 
         override fun onItemClea() {
-            itemView.setBackgroundColor(0)
+            itemView.setBackgroundColor(Color.WHITE)
         }
     }
 

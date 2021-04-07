@@ -11,12 +11,14 @@ import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.data.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.AdapterNotes
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperCallback
+import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.OnStartDragListener
 import kotlinx.android.synthetic.main.fragment_list_notes.*
 
 class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
 
     private lateinit var recyclerView: RecyclerView
-    private val adapter by lazy { AdapterNotes() }
+    private lateinit var itemTouchHelper: ItemTouchHelper
+    private val adapter by lazy { AdapterNotes(dragListener) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +30,8 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
         recyclerView.adapter = adapter
 
         //подключаем к ItemTouchHelper
-        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(recyclerView)
+        itemTouchHelper=  ItemTouchHelper(ItemTouchHelperCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
 
         val listNotes = listOf(
             Pair(NotesData(0, "Name 0", "Message 0"), false),
@@ -59,6 +62,12 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
             activity?.let {
                 it.supportFragmentManager.popBackStack()
             }
+        }
+    }
+
+    private val dragListener = object : OnStartDragListener {
+        override fun onStartDragListener(viewHolder: RecyclerView.ViewHolder) {
+            itemTouchHelper.startDrag(viewHolder)
         }
     }
 

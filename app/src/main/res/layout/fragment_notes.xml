@@ -28,6 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_notes">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_name_notes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/text_field" />
@@ -47,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_input_title">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_message_notes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/text_field" />

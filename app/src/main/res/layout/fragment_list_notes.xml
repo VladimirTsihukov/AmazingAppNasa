@@ -17,6 +17,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_view_notes_list"
         android:layout_width="0dp"
+        android:background="@color/color_gray"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"

@@ -36,9 +36,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     private fun getNotes() : NotesData {
-//        val nameNotes = tv_name_notes.text.toString() ?: "Name notes"
-//        val messageNotes = tv_message_notes.text.toString() ?: "Message notes"
-        return NotesData(id = 0, nameNotes = "Name notes", message = "Message notes")
+        val nameNotes = text_name_notes.text.toString()
+        val messageNotes = btn_save_notes.text.toString()
+        return NotesData(id = 0, nameNotes = nameNotes, message = messageNotes)
     }
 
     private fun initToolbar() {

@@ -2,14 +2,17 @@ package com.adnroidapp.amazingappnasa
 
 import android.app.Application
 import androidx.preference.PreferenceManager
+import com.adnroidapp.amazingappnasa.database.databaseNotes.DbNotes
 
 class App : Application() {
     companion object {
         lateinit var instance: App
+        lateinit var db : DbNotes
     }
 
     override fun onCreate() {
         super.onCreate()
+        db = DbNotes.instance(applicationContext)
         instance = this
     }
 

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adnroidapp.amazingappnasa.R
-import com.adnroidapp.amazingappnasa.data.NotesData
+import com.adnroidapp.amazingappnasa.database.dbData.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.AdapterNotes
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperCallback
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.OnStartDragListener
@@ -34,11 +34,12 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         val listNotes = listOf(
-            Pair(NotesData(0, "Name 0", "Message 0"), false),
-            Pair(NotesData(1, "Name 1", "Message 1"), false),
-            Pair(NotesData(2, "Name 2", "Message 2"), false),
-            Pair(NotesData(3, "Name 3", "Message 3"), false),
-            Pair(NotesData(4, "Name 4", "Message 4"), false),
+            NotesData(0, "Name 0", "Message 0"),
+            NotesData(1, "Name 1", "Message 1"),
+            NotesData(2, "Name 2", "Message 2"),
+            NotesData(3, "Name 3", "Message 3"),
+            NotesData(4, "Name 4", "Message 4"),
+            NotesData(5, "Name 5", "Message 5"),
         )
 
         adapter.setItem(listNotes)
@@ -53,7 +54,7 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
     }
 
     fun addNotes(notesData: NotesData) {
-        adapter.addNotes(Pair(notesData, false))
+        adapter.addNotes(notesData)
     }
 
     private fun initToolbar () {

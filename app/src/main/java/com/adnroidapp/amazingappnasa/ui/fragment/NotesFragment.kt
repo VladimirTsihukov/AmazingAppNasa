@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.adnroidapp.amazingappnasa.R
-import com.adnroidapp.amazingappnasa.data.NotesData
+import com.adnroidapp.amazingappnasa.database.dbData.NotesData
 import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
@@ -20,7 +20,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
-
         btn_save_notes.setOnClickListener {
 
             activity?.let {

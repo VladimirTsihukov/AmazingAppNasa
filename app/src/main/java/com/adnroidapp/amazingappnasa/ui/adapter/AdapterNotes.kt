@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.adnroidapp.amazingappnasa.R
-import com.adnroidapp.amazingappnasa.data.NotesData
+import com.adnroidapp.amazingappnasa.database.dbData.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperAdapter
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperViewHolder
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.OnStartDragListener
@@ -18,9 +18,9 @@ import kotlinx.android.synthetic.main.view_holder_notes.view.*
 class AdapterNotes (private val onStartDragListener: OnStartDragListener)
     : RecyclerView.Adapter<AdapterNotes.HolderNotes>(), ItemTouchHelperAdapter {
 
-    private var listNotes = mutableListOf<Pair<NotesData, Boolean>>()
+    private var listNotes = mutableListOf<NotesData>()
 
-    fun setItem(newListNotes: List<Pair<NotesData, Boolean>>) {
+    fun setItem(newListNotes: List<NotesData>) {
         listNotes.addAll(newListNotes)
         notifyDataSetChanged()
     }
@@ -32,12 +32,12 @@ class AdapterNotes (private val onStartDragListener: OnStartDragListener)
     }
 
     override fun onBindViewHolder(holder: HolderNotes, position: Int) {
-        holder.onBind(listNotes[position].first)
+        holder.onBind(listNotes[position])
     }
 
     override fun getItemCount(): Int = listNotes.size
 
-    fun addNotes(notes: Pair<NotesData, Boolean>) {
+    fun addNotes(notes: NotesData) {
         listNotes.add(notes)
         notifyItemInserted(listNotes.size)
     }

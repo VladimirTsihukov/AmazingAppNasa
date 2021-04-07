@@ -2,7 +2,7 @@ package com.adnroidapp.amazingappnasa
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.adnroidapp.amazingappnasa.data.NotesData
+import com.adnroidapp.amazingappnasa.database.dbData.NotesData
 import com.adnroidapp.amazingappnasa.ui.fragment.NotesListFragment
 import com.adnroidapp.amazingappnasa.ui.fragment.OnFragmentGetDataNotes
 import com.adnroidapp.amazingappnasa.ui.fragment.PicturesOfTheDayFragment

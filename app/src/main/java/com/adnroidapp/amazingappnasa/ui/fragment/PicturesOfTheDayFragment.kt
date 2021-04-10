@@ -2,8 +2,13 @@ package com.adnroidapp.amazingappnasa.ui.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.QuoteSpan
 import android.view.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -32,7 +37,6 @@ import kotlinx.android.synthetic.main.fragment_main_start.input_edit_text
 import kotlinx.android.synthetic.main.fragment_main_start.input_layout
 import kotlinx.android.synthetic.main.view_show_image_web_view.*
 import java.util.*
-import kotlinx.android.synthetic.main.fragment_main_start.layout_load_image as layout_load_image1
 
 class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
 
@@ -46,6 +50,10 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
         setBottomAppBar(view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         setTabLayout(view)
+        activity?.let {
+            bottom_sheet_description_text.typeface = Typeface.createFromAsset(it.assets, "fonts/Backslash-RpJol.otf")
+            bottom_sheet_description_header.typeface = Typeface.createFromAsset(it.assets, "fonts/Backslash-RpJol.otf")
+        }
     }
 
     private fun setTabLayout(view: View) {
@@ -120,7 +128,16 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
         when (data) {
             is PictureOfTheDayData.Success -> {
                 serverResponseData = data.serverResponse
-                bottom_sheet_description.text = serverResponseData.explanation
+                val textSpannable = SpannableString(serverResponseData.explanation)
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                    textSpannable.setSpan(
+                        QuoteSpan(Color.GRAY, 10, 10),
+                        0,
+                        2,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+                bottom_sheet_description.text = textSpannable
                 bottom_sheet_description_header.text = serverResponseData.title
 
                 serverResponseData.url?.let {

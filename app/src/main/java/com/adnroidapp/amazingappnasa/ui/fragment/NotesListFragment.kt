@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adnroidapp.amazingappnasa.R
-import com.adnroidapp.amazingappnasa.database.dbData.NotesData
 import com.adnroidapp.amazingappnasa.ui.adapter.AdapterNotes
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.ItemTouchHelperCallback
 import com.adnroidapp.amazingappnasa.ui.adapter.itemTouchHelper.OnStartDragListener
@@ -49,10 +48,6 @@ class NotesListFragment : Fragment(R.layout.fragment_list_notes) {
                     .addToBackStack(NotesFragment.TAG).commit()
             }
         }
-    }
-
-    fun addNotes(notesData: NotesData) {
-        adapter.addNotes(notesData)
     }
 
     private fun initToolbar () {

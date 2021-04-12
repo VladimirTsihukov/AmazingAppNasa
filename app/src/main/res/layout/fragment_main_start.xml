@@ -96,16 +96,6 @@
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="?attr/backgroundFloatingActionButton"
-        app:layout_anchor="@id/bottom_app_bar"
-        app:srcCompat="@drawable/ic_plus_fab"
-        app:tint="@color/white" />
+        app:layout_scrollFlags="scroll|enterAlways"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

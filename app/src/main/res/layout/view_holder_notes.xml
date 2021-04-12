@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/img_drag_drop"
         app:layout_constraintEnd_toStartOf="@+id/img_drag_drop"
         app:layout_constraintTop_toTopOf="@+id/img_drag_drop"
-        app:srcCompat="@drawable/ic_archive" />
+        app:srcCompat="@drawable/ic_baseline_delete" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_message_notes"

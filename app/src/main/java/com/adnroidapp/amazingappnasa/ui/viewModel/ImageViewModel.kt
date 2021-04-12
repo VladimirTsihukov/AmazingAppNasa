@@ -5,11 +5,11 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.adnroidapp.amazingappnasa.R
-import com.adnroidapp.amazingappnasa.TAG_MAIN
 import com.adnroidapp.amazingappnasa.api.ApiFactory
 import com.adnroidapp.amazingappnasa.data.ImageDataClass
 import com.adnroidapp.amazingappnasa.data.PhotoRoverInMars
 import com.adnroidapp.amazingappnasa.data.ResponseImageEarth
+import com.adnroidapp.amazingappnasa.ui.activity.TAG_MAIN
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

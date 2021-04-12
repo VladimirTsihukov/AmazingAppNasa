@@ -15,7 +15,7 @@ class ItemTouchHelperCallback(private val adapter: AdapterNotes) : ItemTouchHelp
 
     //включает возможность перетаскивания по длинному нажатию
     override fun isItemViewSwipeEnabled(): Boolean {
-        return super.isItemViewSwipeEnabled()
+        return true
     }
 
     //определяет направления перетаскивания

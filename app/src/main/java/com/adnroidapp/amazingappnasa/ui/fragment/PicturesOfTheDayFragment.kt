@@ -19,11 +19,11 @@ import com.adnroidapp.amazingappnasa.ClassKey.SEARCH_WIKI
 import com.adnroidapp.amazingappnasa.ClassKey.TODAY
 import com.adnroidapp.amazingappnasa.ClassKey.TWO_DAY_AGO
 import com.adnroidapp.amazingappnasa.ClassKey.YESTERDAY
-import com.adnroidapp.amazingappnasa.MainActivity
 import com.adnroidapp.amazingappnasa.R
 import com.adnroidapp.amazingappnasa.data.NasaImageResponse
 import com.adnroidapp.amazingappnasa.toast
 import com.adnroidapp.amazingappnasa.ui.PictureOfTheDayData
+import com.adnroidapp.amazingappnasa.ui.activity.MainActivity
 import com.adnroidapp.amazingappnasa.ui.viewModel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior

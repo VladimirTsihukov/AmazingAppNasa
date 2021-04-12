@@ -1,15 +1,14 @@
-package com.adnroidapp.amazingappnasa.ui
+package com.adnroidapp.amazingappnasa.ui.activity
 
 import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import com.adnroidapp.amazingappnasa.MainActivity
 import com.adnroidapp.amazingappnasa.R
 import kotlinx.android.synthetic.main.activity_splash.*
 
-class ActivitySplash : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +20,7 @@ class ActivitySplash : AppCompatActivity() {
             .setDuration(2000)      //время анимации
             .setListener(object : Animator.AnimatorListener {
                 override fun onAnimationEnd(p0: Animator?) {
-                    startActivity(Intent(this@ActivitySplash, MainActivity::class.java))
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     finish()
                 }
                 override fun onAnimationStart(p0: Animator?) {}

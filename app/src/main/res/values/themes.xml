@@ -16,6 +16,10 @@
         <item name="colorMenuTool">@color/white</item>
     </style>
 
+    <style name="Splash" parent="Nasa">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
+
     <style name="Mars" parent="Nasa">
         <item name="colorPrimary">@color/color_orange_primary_mars</item>
         <item name="colorPrimaryVariant">@color/color_orange_dark_mars</item>

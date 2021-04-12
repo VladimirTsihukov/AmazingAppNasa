@@ -29,12 +29,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main_start.*
-import kotlinx.android.synthetic.main.fragment_main_start.bottom_app_bar
-import kotlinx.android.synthetic.main.fragment_main_start.fab
-import kotlinx.android.synthetic.main.fragment_main_start.input_edit_text
-import kotlinx.android.synthetic.main.fragment_main_start.input_layout
 import kotlinx.android.synthetic.main.view_show_image_web_view.*
 import java.util.*
 

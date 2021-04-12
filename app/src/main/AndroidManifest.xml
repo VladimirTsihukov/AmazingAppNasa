@@ -13,8 +13,10 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Nasa">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Splash">
+        <activity
+            android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -43,18 +43,15 @@ class AdapterNotes(private val onStartDragListener: OnStartDragListener) :
 
     override fun getItemCount(): Int = listNotes.size
 
-    fun addNotes(notes: NotesData) {
-        listNotes.add(notes)
-        notifyItemInserted(listNotes.size)
-    }
-
     inner class HolderNotes(private val view: View) : RecyclerView.ViewHolder(view),
         ItemTouchHelperViewHolder {
+
         private var isCheckedMessage = false
 
         @SuppressLint("ClickableViewAccessibility")
         fun onBind(notes: NotesData) {
             with(itemView) {
+                setBackgroundColor(Color.WHITE)
                 tv_name_notes.text = notes.nameNotes
                 tv_message_notes.text = notes.message
                 img_delete_notes.setOnClickListener { deleteNotes() }
@@ -116,11 +113,6 @@ class AdapterNotes(private val onStartDragListener: OnStartDragListener) :
     override fun itemDismiss(position: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             App.db.notes().deleteNotes(listNotes[position])
-
-            withContext(Dispatchers.Main) {
-                listNotes.removeAt(position)
-                notifyItemRemoved(position)
-            }
         }
     }
 }

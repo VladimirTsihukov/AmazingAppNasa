@@ -34,4 +34,6 @@
     <color name="background_color_bottom_sheet">#DCDCDC</color>
     <color name="background_color_navigation_layout">#DCDCDC</color>
     <color name="background_card_view">#C5D3C5</color>
+
+    <color name="testColor">#212121</color>
 </resources>

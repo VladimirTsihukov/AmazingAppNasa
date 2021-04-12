@@ -11,7 +11,6 @@ import android.text.SpannableString
 import android.text.style.QuoteSpan
 import android.view.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.api.load
@@ -25,7 +24,6 @@ import com.adnroidapp.amazingappnasa.toast
 import com.adnroidapp.amazingappnasa.ui.PictureOfTheDayData
 import com.adnroidapp.amazingappnasa.ui.activity.MainActivity
 import com.adnroidapp.amazingappnasa.ui.viewModel.PictureOfTheDayViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
@@ -97,13 +95,12 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
                         .addToBackStack(SettingFragment.TAG).commit()
                 }
             }
-            R.id.app_bar_search -> toast("Search")
-            android.R.id.home -> {
+            R.id.app_bar_notes -> {
                 activity?.let {
-                    BottomNavigationDrawerFragment().show(
-                        it.supportFragmentManager,
-                        BottomNavigationDrawerFragment.TAG
-                    )
+                    it.supportFragmentManager.beginTransaction()
+                        .add(R.id.container, NotesListFragment.newInstance(), NotesListFragment.TAG)
+                        .addToBackStack(NotesFragment.TAG)
+                        .commit()
                 }
             }
             R.id.app_bar_image -> {
@@ -209,38 +206,9 @@ class PicturesOfTheDayFragment : Fragment(R.layout.fragment_main_start) {
         val context = activity as MainActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
         setHasOptionsMenu(true)
-
-        fab.setOnClickListener {
-            if (isMain) {
-                darkensLayoutPicture()
-                bottom_app_bar.navigationIcon = null
-                bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
-                bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar_two_screen)
-            } else {
-                lighterLayoutPicture()
-                bottom_app_bar.navigationIcon =
-                    ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
-                bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
-                bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar)
-            }
-            isMain = !isMain
-        }
-    }
-
-    private fun darkensLayoutPicture() {
-        tableLayout.animate().alpha(0.2f).duration = 300
-        layout_load_image.animate().alpha(0.2f).duration = 300
-    }
-
-    private fun lighterLayoutPicture() {
-        tableLayout.animate().alpha(1f).duration = 300
-        layout_load_image.animate().alpha(1f).duration = 300
     }
 
     companion object {
         fun newInstance() = PicturesOfTheDayFragment()
-        private var isMain = true
     }
 }
